@@ -1,6 +1,7 @@
 package com.geekbaggio.gameranker.service;
 
 import com.geekbaggio.gameranker.dao.GameDao;
+import com.geekbaggio.gameranker.exception.GameNotFoundException;
 import com.geekbaggio.gameranker.models.Game;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ public class GameService {
         return gameDao.findAll();
     }
 
-    public Optional<Game> getGameById(UUID id) {
-        return gameDao.findById(id);
+    public Game getGameById(UUID id) {
+        return gameDao.findById(id).orElseThrow(() -> new GameNotFoundException("Game with given ID not found."));
     }
 
     public Game addGame(Game game) {

@@ -24,7 +24,7 @@ public class GameController {
 
     @GetMapping("{id}")
     public ResponseEntity<Game> getGameById(@PathVariable UUID id) {
-        return new ResponseEntity<>(questionService.getGameById(id).orElse(null), HttpStatus.OK);
+        return new ResponseEntity<>(questionService.getGameById(id), HttpStatus.OK);
     }
 
     @PostMapping
@@ -35,7 +35,7 @@ public class GameController {
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteGame(@PathVariable UUID id) {
         questionService.deleteGame(id);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("{id}")

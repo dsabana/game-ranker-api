@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+  db:
+    container_name: game-ranker-db
+    image: 'postgres:14.1-alpine'
+    ports:
+      - '2345:5432'
+    restart: 'always'
+    environment:
+      POSTGRES_USER: 'game_ranker'
+      POSTGRES_DB: 'game_ranker_db'
+      POSTGRES_PASSWORD: 'secret'

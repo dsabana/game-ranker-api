@@ -1,0 +1,29 @@
+GET http://localhost:8080/games
+
+###
+
+POST http://localhost:8080/games
+Content-Type: application/json
+
+{
+    "name": "Scythe",
+    "rank": 2
+}
+
+###
+
+PUT http://localhost:8080/games/806763bb-efe2-40c8-b30b-e26cec31a891
+Content-Type: application/json
+
+{
+  "name": "Kemet",
+  "rank": 1
+}
+
+###
+
+DELETE http://localhost:8080/games/80ad74b3-1ec6-4a87-88f2-d287d430cc67
+
+###
+
+GET http://localhost:8080/games/fd4405e0-0afc-45a5-8bf3-19cb71036f6c

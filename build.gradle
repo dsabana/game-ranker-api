@@ -1,0 +1,48 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.3'
+	id 'io.spring.dependency-management' version '1.1.4'
+	id "org.flywaydb.flyway" version "8.3.0"
+}
+
+group = 'com.geekbaggio'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+flyway {
+	url = 'jdbc:postgresql://localhost:2345/game_ranker_db'
+	user = 'game_ranker'
+	password = 'secret'
+	driver = 'org.postgresql.Driver'
+	schemas = ['game_ranker'] // Specify the schema if necessary
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+// we need to build classes before we can migrate
+flywayMigrate.dependsOn classes
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
